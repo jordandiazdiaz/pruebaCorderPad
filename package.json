@@ -1,0 +1,15 @@
+{
+  "name": "prueba-corderpad-qa",
+  "version": "1.0.0",
+  "description": "Prueba QA - Automatizacion E2E y APIS con Cypress",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run:e2e": "cypress run --spec 'cypress/e2e/saucedemo/**/*.cy.js'",
+    "cy:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.js'",
+    "cy:run:all": "cypress run",
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.0"
+  }
+}

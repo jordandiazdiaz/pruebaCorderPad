@@ -1,0 +1,84 @@
+================================================================================
+CONCLUSIONES Y HALLAZGOS
+Prueba QA - Automatizacion E2E y APIS
+================================================================================
+
+RESULTADOS DE EJECUCION
+------------------------
+- Tests E2E (SauceDemo):  1 test  - PASSED
+- Tests APIS (Petstore):  4 tests - PASSED (4/4)
+- Total:                  5 tests - TODOS PASARON
+
+================================================================================
+HALLAZGOS - AUTOMATIZACION E2E (SauceDemo)
+================================================================================
+
+1. La pagina https://www.saucedemo.com/ es una aplicacion de practica bien
+   estructurada para pruebas E2E. Los selectores data-test facilitan la
+   automatizacion y son una buena practica de desarrollo.
+
+2. El flujo de compra funciona correctamente de principio a fin:
+   Login -> Agregar productos -> Carrito -> Checkout -> Confirmacion.
+
+3. Los elementos de la pagina tienen selectores estables (data-test attributes),
+   lo cual hace que las pruebas sean menos fragiles ante cambios de UI.
+
+4. El badge del carrito se actualiza correctamente al agregar productos,
+   proporcionando feedback visual inmediato al usuario.
+
+5. El formulario de checkout valida campos obligatorios (firstName, lastName,
+   postalCode). Si se omiten, muestra mensajes de error apropiados.
+
+6. El mensaje de confirmacion "Thank you for your order!" se muestra
+   correctamente al completar la compra.
+
+================================================================================
+HALLAZGOS - APIS (Petstore Swagger)
+================================================================================
+
+1. La API de Petstore (https://petstore.swagger.io/v2) responde correctamente
+   a todas las operaciones CRUD probadas.
+
+2. POST /pet: Permite crear mascotas con todos los campos (id, name, category,
+   photoUrls, tags, status). Retorna status 200 con el objeto creado.
+
+3. GET /pet/{petId}: La busqueda por ID retorna correctamente la mascota
+   creada previamente con todos sus campos intactos.
+
+4. PUT /pet: La actualizacion funciona correctamente. Se pudo cambiar el nombre
+   de "Firulais" a "Firulais Updated" y el estatus de "available" a "sold"
+   sin problemas.
+
+5. GET /pet/findByStatus?status=sold: El endpoint de busqueda por estatus
+   retorna un array con todas las mascotas que tienen el estatus consultado.
+   Se verifico que la mascota actualizada aparece correctamente en los
+   resultados filtrados.
+
+6. La API no requiere autenticacion para las operaciones basicas de CRUD,
+   lo cual es apropiado para un entorno de pruebas/demo.
+
+7. Los tiempos de respuesta fueron aceptables:
+   - POST: ~760ms
+   - GET por ID: ~124ms
+   - PUT: ~125ms
+   - GET por status: ~134ms
+
+================================================================================
+CONCLUSIONES GENERALES
+================================================================================
+
+1. Cypress es una herramienta adecuada tanto para pruebas E2E como para
+   pruebas de API REST. Su sintaxis es clara y permite escribir tests
+   legibles y mantenibles.
+
+2. El uso de cy.request() para pruebas de API es eficiente ya que no requiere
+   un navegador, lo que reduce significativamente el tiempo de ejecucion.
+
+3. Ambas aplicaciones bajo prueba (SauceDemo y Petstore) funcionan
+   correctamente y cumplen con los flujos esperados.
+
+4. Se recomienda siempre usar IDs aleatorios en pruebas de API para evitar
+   colisiones con datos de otros testers, como se implemento en este proyecto.
+
+5. Los videos generados por Cypress son utiles como evidencia de ejecucion
+   y para depuracion en caso de fallos.
